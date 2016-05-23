@@ -1,0 +1,20 @@
+<%- include inc/header.html %>
+<div class="content">
+    <%- include inc/breadLine.html %>
+    <div class="ui attached segment" >
+        <form class="ui form segment" action="/admin/doFrameworkCate" method="post">
+            <div class="field clear_float">
+                <label for="cateFrameworkId">框架分类Id</label>
+                <input type="number" name="cateid" id="cateFrameworkId">
+            </div>
+            <div class="field clear_float">
+                <label for="frameworkName">框架分类名称</label>
+                <input type="text" name="name" id="frameworkName">
+            </div>
+            <div class="ui blue submit button" id="frameSubmit">添加</div>
+        </form>
+        <div class="ui error message" style="display: none;"></div>
+    </div>
+</div>
+<%- include inc/footer.html %>
+<script src="/views/admin/public/js/cate.js"></script>

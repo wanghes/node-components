@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>mDialog</title>
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./mdialog.css">
+    <script src="./fastclick.min.js"></script>
+    <script src="./mdialog.min.js"></script>
+    <style>
+        body{
+            background: url("/static/images/bg.png") repeat;
+        }
+        p{ margin-bottom:40px;}
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-horizontal">
+            <div class="col-sm-12">
+                <div class="jumbotron text-center">
+                    <h1>mDialog 弹出层插件</h1>
+                </div>
+                <div class="text-center">
+                    <div class="demo_1">
+                        <h3>基本示例</h3>
+                        <button type="button" class="btn btn-primary" id="demo1" value="弹窗1">点击这里</button>
+                    </div>
+                    <hr>
+                    <div class="demo_2">
+                        <h3>更改弹窗标题</h3>
+                        <button type="button" class="btn btn-primary" id="demo2" value="弹窗2">点击这里</button>
+                    </div>
+                    <hr>
+                    <div class="demo_3">
+                        <h3>自定义“确定”按钮文字及回调</h3>
+                        <button type="button" class="btn btn-primary" id="demo3" value="弹窗3">点击这里</button>
+                    </div>
+                    <hr>
+                    <div class="demo_4">
+                        <h3>显示两个按钮，且点“确定”按钮不关闭弹窗</h3>
+                        <button type="button" class="btn btn-primary" id="demo4" value="弹窗4">点击这里</button>
+                    </div>
+                    <hr>
+                    <div class="demo_5">
+                        <h3>不带按钮，不带遮罩层，可在外部关闭</h3>
+                        <button type="button" class="btn btn-primary" id="demo5" value="弹窗5">点击这里</button>
+                        <button type="button" class="btn btn-danger" id="closeMyDialogBtn" value="弹窗5">关闭左侧按钮打开的弹窗</button>
+                    </div>
+                    <hr>
+                    <div class="demo_6">
+                        <h3>定时关闭</h3>
+                        <button type="button" class="btn btn-primary" id="demo6" value="弹窗6">点击这里</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //fastclick初始化
+    window.addEventListener('load', function () {
+        FastClick.attach(document.body);
+    }, false);
+
+    document.getElementById('demo1').addEventListener('click', function () {
+        mDialog('我是弹窗内容');
+    }, false);
+
+    document.getElementById('demo2').addEventListener('click', function () {
+        mDialog('我是弹窗内容', {title: '我是自定义标题'});
+    }, false);
+
+    document.getElementById('demo3').addEventListener('click', function () {
+        mDialog('我是弹窗内容', {okBtn: {text: '点我点我', callback: function () {
+            alert('hoho~');
+        }}});
+    }, false);
+
+    document.getElementById('demo4').addEventListener('click', function () {
+        mDialog('点确定按钮不会关闭弹窗鸟~', {okBtn: {callback: function () {
+            alert('我是确定按钮的回调');
+            return false;
+        }}, cancelBtn: {callback: function () {
+            alert('我是取消按钮的回调');
+        }}});
+    }, false);
+
+    document.getElementById('demo5').addEventListener('click', function () {
+        mDialog('点“弹窗5”按钮旁边的按钮可关闭本弹窗', {id: 'myDialog', mask: false, okBtn: {hide: true}});
+    }, false);
+
+    document.getElementById('closeMyDialogBtn').addEventListener('click', function () {
+        mDialog.close(document.getElementById('myDialog'));
+    }, false);
+
+    var oTimer = null;
+    document.getElementById('demo6').addEventListener('click', function () {
+        var oDialog = mDialog('本弹窗将在打开3秒后自动关闭', {okBtn: {hide: true},closeBtn:{hide:true}});
+        oTimer = setTimeout(function () {
+            oDialog.close();
+        }, 3000);
+    }, false);
+</script>
+</body>
+</html>

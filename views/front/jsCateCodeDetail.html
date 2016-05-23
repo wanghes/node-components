@@ -1,0 +1,76 @@
+<%- include inc/header.html %>
+<link rel="stylesheet" type="text/css" href="/views/admin/public/wangEditor/highlightJS/highlightJS/styles/sublime.css">
+<script type="text/javascript" src="/views/admin/public/wangEditor/highlightJS/highlightJS/highlight.pack.js"></script>
+<div class="breadcrumb_wrap">
+    <div class="ui large breadcrumb">
+        <a class="section" href="/">首页</a>
+        <i class="right chevron icon divider"></i>
+        <div class="section">代码分类</div>
+        <i class="right chevron icon divider"></i>
+        <a class="section" href="/jsCodes/cate/<%= code.cateid %>/1"><%= cateName %></a>
+        <i class="right chevron icon divider"></i>
+        <div class="active section"><%= code.title %></div>
+    </div>
+</div>
+
+<div class="wrap">
+    <div class="ui raised very padded text container segment" id="detail">
+        <h2 class="ui header"><%= code.title %></h2>
+        <p>
+            <span class="date">作者: <%= code.author %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="date">创建时间: <%= moment(code.date).format('YYYY-MM-DD HH:mm:ss') %></span>
+        </p>
+        <div class="ui divider"></div>
+        <div>
+            <img onclick="window.open('<%= code.imgpath  %>')" src="<%= code.imgpath  %>" style="cursor: pointer">
+            <div class="ui segment">
+                <p><strong>描述内容：</strong>
+                    <% if(code.des){ %>
+                    <%- code.des%>
+                    <% }else{ %>
+                    没有描述内容
+                    <% } %>
+                </p>
+            </div>
+            <%- code.content %>
+            <div class="ui divider"></div>
+            <div class="ui large  bottom attached buttons">
+                <% if(prev){ %>
+                <a class="ui left labeled icon button" href="/jsCodes/cate/<%= prev.cateid %>/detail/<%= prev._id %>"><i class="left arrow icon"></i>上一个</a>
+                <% }else{%>
+                <a class="ui left labeled icon button " href="javascript:;"><i class="left arrow icon"></i>已经是第一个</a>
+                <%  }%>
+                <div class="or"></div>
+                <% if(next){ %>
+                <a class="ui right labeled icon button black" href="/jsCodes/cate/<%= next.cateid %>/detail/<%= next._id %>"><i class="right arrow icon"></i>下一个</a>
+                <% }else{%>
+                <a class="ui right labeled icon button black" href="javascript:;"><i class="right arrow icon"></i>已经是最后一个</a>
+                <% }%>
+            </div>
+        </div>
+        <div class="right ui rail" style="margin-left: 0; padding-left: 0;">
+            <div class="ui sticky" >
+                <div class="ui vertical buttons">
+                    <a href=" <%- code.path %>" target="_blank" class="ui icon black button i_popup" data-content="预览效果"><i class="unhide icon"></i></a>
+                    <a href="javascript:;" class="ui icon black button i_popup" data-content="喜欢"><i class="heart icon"></i></a>
+                    <% if(prev){ %>
+                    <a href="/jsCodes/cate/<%= prev.cateid %>/detail/<%= prev._id %>" class="ui icon  button i_popup"  data-content="上一个"><i class="chevron left icon"></i></a>
+                    <% }else{ %>
+                    <a href="javascript:;" class="ui icon button i_popup"  data-content="已经是第一个"><i class="chevron left icon"></i></a>
+                    <%  } %>
+                    <% if(next){ %>
+                    <a href="/jsCodes/cate/<%= next.cateid %>/detail/<%= next._id %>" class="ui icon  button i_popup" data-content="下一个"><i class="chevron right icon"></i></a>
+                    <% }else{ %>
+                    <a href="javascript:;" class="ui icon  button i_popup" data-content="已经是最后一个">
+                        <i class="chevron right icon"></i>
+                    </a>
+                    <% } %>
+                    <a href="javascript:;" class="ui icon blue button i_popup" style="display: none;" data-content="返回顶部" id="back-to-top">
+                        <i class="arrow up icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+   </div>
+</div>
+<%- include inc/footer.html %>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>前端开发效果库</title>
+    <link rel="stylesheet" href="/static/css/semantic.css" charset="utf-8">
+    <link rel="stylesheet" href="/static/css/front.css" charset="utf-8">
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/semantic.min.js"></script>
+</head>
+<body id="front" >
+    <div class="wrapper">
+        <div class="ui inverted   menu " style="font-family: '微软雅黑';">
+            <div class="header item logo" style="" onclick="location.href='/'">
+                <img class="logo_img" src="/static/images/logo.png">
+            </div>
+            <a class="item <% if(index==1){%>active<%}%>" href="/"><i class="home icon"></i>代码首页</a>
+            <div class="ui dropdown item" tabindex="0">
+                <i class="list layout icon"></i>代码分类
+                <i class="dropdown icon"></i>
+                <div class="menu transition hidden" tabindex="-1">
+                    <div class="item"><a href="/jsCodes/index/1">全部</a></div>
+                    <% jsCates.forEach(function(jsCate){ %>
+                    <div class="item"><a href="/jsCodes/cate/<%= jsCate.cateid%>/1"><%= jsCate.name %></a></div>
+                    <% }) %>
+                </div>
+            </div>
+            <div class="ui dropdown item" tabindex="0">
+                <i class="browser icon"></i>WEB前端开发框架
+                <i class="dropdown icon"></i>
+                <div class="menu transition hidden" tabindex="-1">
+                    <div class="item"><a href="/frameworks/index/1">全部</a></div>
+                    <% frameworkCates.forEach(function(frameworkCate){ %>
+                    <div class="item"><a href="/frameworks/cate/<%= frameworkCate.cateid%>/1"><%= frameworkCate.name %></a></div>
+                    <% }) %>
+                </div>
+            </div>
+            <div class="ui dropdown item" tabindex="0">
+                <i class="book icon"></i>全栈试开发社区
+                <i class="dropdown icon"></i>
+                <div class="menu transition hidden" tabindex="-1">
+                    <div class="item"><a href="/articles/index/1">全部</a></div>
+                    <% articleCates.forEach(function(articleCate){ %>
+                    <div class="item"><a href="/articles/cate/<%= articleCate.cateid%>/1"><%= articleCate.name %></a></div>
+                    <% }) %>
+                </div>
+            </div>
+
+            <div class="right menu">
+                <div class="item">
+                    <div class="ui action inverted  left icon input  transparent">
+                        <i class="search icon"></i>
+                        <input type="text" placeholder="搜索名称关键字">
+                        <button class="ui button" style="background:#333;font-family: '微软雅黑'; color:#bbb;">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>

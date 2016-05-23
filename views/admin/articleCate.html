@@ -1,0 +1,23 @@
+<%- include inc/header.html %>
+<div class="content ">
+    <%- include inc/breadLine.html %>
+    <div class="ui attached segment height_box">
+        <div class="row">
+            <form class="ui segment form" action="/admin/doArticleCate" method="post">
+                <div class="field clear_float">
+                    <label>文章分类Id</label>
+                    <input type="number" name="cateid" id="cateArticleId">
+                </div>
+                <div class="field clear_float">
+                    <label>文章内容</label>
+                    <input type="text" name="name" id="articleName">
+                </div>
+                <div class="ui blue submit button" id="articleSubmit">添加</div>
+            </form>
+            <div class="ui error message" style="display: none;"></div>
+        </div>
+    </div>
+</div>
+
+<%- include inc/footer.html %>
+<script src="/views/admin/public/js/cate.js"></script>

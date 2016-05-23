@@ -1,0 +1,44 @@
+<%- include inc/header.html %>
+<div class="content">
+    <%- include inc/breadLine.html %>
+    <div class="ui buttom attached segment">
+        <div class="com_list ui segment">
+            <% jsCateCodes.forEach(function(jsCateCode){ %>
+            <div class="list_one ">
+                <div class="fl operate_btn">
+                    <div class=" mini ui buttons">
+                      <div class="ui  button mini deleteNode"  data-href="/admin/deleteCode/<%= jsCateCode._id %>">删除</div>
+                      <div class="or"></div>
+                      <a class="ui instagram button mini" href="/admin/editCode/<%= jsCateCode._id %>" target="_blank">修改</a>
+                    </div>
+                </div>
+                <div class="fl">
+                    <a href="/admin/jsCodes/<%= jsCateCode._id %>"><%= jsCateCode.title %></a>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+<%- include inc/footer.html %>
+
+
+<script type="text/javascript">
+$(function(){
+    $('.deleteNode').click(function(e){
+        e.preventDefault();
+        var href = $(this).data('href');
+        $.get(href,{},function(result){
+            if(result.status){
+                warn(result.message,'','','100px');
+                setTimeout(function(){
+                    location.reload();
+                },1200)
+            }else{
+                warn(result.message,'','','100px');
+            }
+
+        });
+    });
+});
+</script>

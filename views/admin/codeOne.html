@@ -1,0 +1,35 @@
+<%- include inc/header.html %>
+<div class="content">
+    <%- include inc/breadLine.html %>
+    <div class="ui attached segment height_box">
+        <div class="ui segment">
+            <div class="admin_content">
+                <h3 class="center"><%= jsCode.title %>&nbsp;&nbsp;</h3>
+                <p class="author_info">作者：<%= jsCode.author %></p>
+                <div class="ui buttons mini" style="padding-bottom: 15px;">
+                    <a href="<%= jsCode.path %>" class="mini blue ui button" target="_blank">查看效果</a>
+                    <div class="or"></div>
+                    <a href="/admin/editCode/<%= jsCode._id %>" class="mini black ui button" target="_blank">修改代码</a>
+                </div>
+                <div id="chuchu" class="description">
+                    <%- jsCode.content %>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include inc/footer.html %>
+<link rel="stylesheet" type="text/css" href="/views/admin/public/wangEditor/highlightJS/highlightJS/styles/sublime.css">
+<script type="text/javascript" src="/views/admin/public/wangEditor/highlightJS/highlightJS/highlight.pack.js"></script>
+<script>
+    $(function(){
+        //执行代码高亮方法
+     $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+
+
+    })
+</script>

@@ -1,0 +1,12 @@
+<div class="breadLine">
+        <ul class="breadcrumb">
+            <li><a href="/admin/">首页</a></li>
+            <li>&gt;</li>
+            <li><%= crumbs[0].value %></li>
+            <% if(crumbs.length>1){ %>
+           	<li>&gt;</li>
+            <li><%= crumbs[1].value %></li>
+            <% } %>
+           
+        </ul>
+    </div>

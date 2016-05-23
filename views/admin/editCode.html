@@ -1,0 +1,166 @@
+<%- include inc/header.html %>
+<div class="content">
+    <%- include inc/breadLine.html %>
+    <div class="ui attached segment height_box">
+        <div class="ui ignored bottom attached warning message">注意：所有的项目代码 - 的显示的文件路径地址“/project/../../index.html”</div>
+        <div class="ui form segment">
+            <form action="/admin/imageFile" method="post" id="imageform" enctype='multipart/form-data'>
+                <div class="field btn up_btn clear_float">
+                    <div id="up_btn"class="ui tiny twitter button up-btn">
+                        <span>标题图片</span>
+                        <input id="filePath" type="file" name="photo">
+                    </div>
+                </div>
+                <div id="up_status" style="display:none"><img src="/static/images/loader.gif" alt="uploading"/></div>
+                <div id="preview" style="display:block;">
+                    <img src="<%= jsCode.imgpath %>">
+                </div>
+            </form>
+            <form>
+                <input type="hidden" name="imgpath" id="imgpath" value="<%= jsCode.imgpath %>">
+                <input type="hidden" name="id" id="CodeId" value="<%= jsCode._id %>">
+                <div class="field clear_float">
+                    <label>代码分类</label>
+                    <select name="cateid" id="cateId">
+                        <% jsCates.forEach(function(jsCate){ %>
+                        <% if(jsCode.cateid == jsCate.cateid){ %>
+                        <option selected value="<%= jsCate.cateid %>"><%= jsCate.name %></option>
+                        <% }else{ %>
+                        <option value="<%= jsCate.cateid %>"><%= jsCate.name %></option>
+                        <% } %>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="field clear_float">
+                    <label>项目名称</label>
+                    <input type="text" name="title" id="title" value="<%= jsCode.title %>">
+                </div>
+                <div class="field clear_float">
+                    <label>摘要</label>
+                    <input type="text" name="des" id="des" value="<%= jsCode.des %>">
+                </div>
+                <div class="field clear_float">
+                    <label>显示的文件路径地址</label>
+                    <input type="text" name="path" id="path" value="<%= jsCode.path %>">
+                </div>
+
+                <div class="field clear_float">
+                    <label>内容</label>
+                    <textarea id='textarea1' name="content" style='height:400px; width:100%;'><%= jsCode.content %></textarea>
+                </div>
+                <div class="ui blue submit button" id="submit">修改</div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<%- include inc/footer.html %>
+<link rel="stylesheet" type="text/css" href="/views/admin/public/wangEditor/css/wangEditor-1.3.12.css">
+<link rel="stylesheet" type="text/css" href="/views/admin/public/wangEditor/highlightJS/highlightJS/styles/github.css">
+<script type="text/javascript" src="/views/admin/public/wangEditor/highlightJS/highlightJS/highlight.pack.js"></script>
+<script type="text/javascript" src='/views/admin/public/wangEditor/wangEditor-1.3.12.min.js'></script>
+<script type="text/javascript" src='/views/admin/public/js/jquery-wallform.js'></script>
+<script type="text/javascript">
+    var express_path = '/views/admin/public/wangEditor/expressions/';
+    $(function(){
+        $('#filePath').off('click').on('change', function(){
+            var status = $("#up_status");
+            var btn = $("#up_btn");
+            $('#preview').html('');
+            $("#imageform").ajaxForm({
+                target: '#preview',
+                beforeSubmit:function(){
+                    status.show();
+                    btn.hide();
+                },
+                success:function(){
+                    status.hide();
+                    btn.show();
+                    $('#preview').show();
+                    $('#imgpath').val($('#showImg').attr('src'));
+                },
+                error:function(){
+                    status.hide();
+                    btn.show();
+                }
+            }).submit();
+        });
+
+        $('#submit').click(function(e){
+            e.preventDefault();
+            var id = $('#CodeId').val();
+            var body = {
+                cateid:$('#cateId').val(),
+                title:$('#title').val(),
+                des:$('#des').val(),
+                path:$('#path').val(),
+                content:$('#textarea1').val(),
+                imgpath:$('#imgpath').val()
+            };
+            $.post('/admin/doEditCode/'+id,body,function(result){
+                if(result){
+                    console.log(result.message);
+                    if(result.status){
+                        location.href = '/admin/jsCodes';
+                    }
+                }
+            },'json');
+            return false;
+        });
+
+        var editor = $('#textarea1').wangEditor({
+            //配置多组表情
+            'expressions': [{
+                'title': '默认',
+                'items': [
+                    '/views/admin/public/wangEditor/expressions/default/1.gif',
+                    '/views/admin/public/wangEditor/expressions/default/2.gif',
+                    '/views/admin/public/wangEditor/expressions/default/3.gif',
+                    '/views/admin/public/wangEditor/expressions/default/4.gif',
+                    '/views/admin/public/wangEditor/expressions/default/5.gif',
+                    '/views/admin/public/wangEditor/expressions/default/6.gif',
+                    '/views/admin/public/wangEditor/expressions/default/7.gif',
+                    '/views/admin/public/wangEditor/expressions/default/8.gif',
+                    '/views/admin/public/wangEditor/expressions/default/9.gif',
+                    '/views/admin/public/wangEditor/expressions/default/10.gif',
+                    '/views/admin/public/wangEditor/expressions/default/11.gif',
+                    '/views/admin/public/wangEditor/expressions/default/12.gif',
+                    '/views/admin/public/wangEditor/expressions/default/13.gif',
+                    '/views/admin/public/wangEditor/expressions/default/14.gif',
+                    '/views/admin/public/wangEditor/expressions/default/15.gif',
+                    '/views/admin/public/wangEditor/expressions/default/16.gif',
+                    '/views/admin/public/wangEditor/expressions/default/17.gif',
+                    '/views/admin/public/wangEditor/expressions/default/18.gif',
+                    '/views/admin/public/wangEditor/expressions/default/19.gif',
+                    '/views/admin/public/wangEditor/expressions/default/20.gif'
+                ]
+            },{
+                'title': '金星',
+                'items': [
+                    '/views/admin/public/wangEditor/expressions/jinxing/1.gif',
+                    '/views/admin/public/wangEditor/expressions/jinxing/2.gif',
+                    '/views/admin/public/wangEditor/expressions/jinxing/3.gif',
+                    '/views/admin/public/wangEditor/expressions/jinxing/4.gif',
+                    '/views/admin/public/wangEditor/expressions/jinxing/5.gif',
+                    '/views/admin/public/wangEditor/expressions/jinxing/6.gif'
+                ]
+            },{
+                'title': '卖萌海狮',
+                'items': [
+                    '/views/admin/public/wangEditor/expressions/sealion/1.gif',
+                    '/views/admin/public/wangEditor/expressions/sealion/2.gif',
+                    '/views/admin/public/wangEditor/expressions/sealion/3.gif',
+                    '/views/admin/public/wangEditor/expressions/sealion/4.gif',
+                    '/views/admin/public/wangEditor/expressions/sealion/5.gif',
+                    '/views/admin/public/wangEditor/expressions/sealion/6.gif'
+                ]
+            }]
+        });
+
+        //执行代码高亮方法
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+    });
+</script>

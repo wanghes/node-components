@@ -1,0 +1,54 @@
+<%- include inc/header.html %>
+<div class="breadcrumb_wrap">
+    <div class="ui large breadcrumb">
+        <a class="section" href="/">首页</a>
+        <i class="right chevron icon divider"></i>
+        <div class="section ">全栈试开发社区</div>
+        <i class="right chevron icon divider"></i>
+        <div class="active section">全部</div>
+    </div>
+</div>
+<div class="wrap">
+
+    <div class="ui column stackable">
+        <div class="ui raised  padded text container segment">
+            <% if(articles.length>0){ %>
+            <div class="ui divided  items">
+                <% articles.forEach(function(one){ %>
+                <div class="item" style="cursor: pointer;" onclick="window.open('/articles/cate/<%= one.cateid %>/detail/<%= one._id %>')">
+                    <div class="ui small image">
+                        <img src="/static/images/default.jpg">
+                    </div>
+                    <div class="content">
+                        <div class="header"><%= one.title %></div>
+                        <div class="meta">
+                            <span class="">创建时间: <%= moment(one.date).format('YYYY-MM-DD HH:mm:ss') %></span>
+                            <span class="">分类: <%= articleCates[one.cateid-1]['name'] %></span>
+                        </div>
+                        <div class="description">
+                            <% if(one.des){ %>
+                            <%- one.des %>
+                            <% }else{ %>
+                            目前还没有描述信息
+                            <% }%>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+            <div style="text-align: center ; padding-top: 10px;">
+                <div class="ui" style="margin-bottom: 10px;">共有<strong><%= pageInfo.counts %></strong>篇文章</div>
+                <div class="ui buttons">
+                    <% pageInfo.pageList.forEach(function(page){ %>
+                    <a href="/articles/index/<%= page %>" class="ui button <% if(page==pageInfo.active){ %> teal <%}else{ %><% }%>"><%= page %>  </a>
+                    <% }) %>
+                </div>
+            </div>
+            <% }else{ %>
+            <div class="ui huge warning message" style="width:100%; ">目前还没有“全栈试开发社区”的内容！ </div>
+            <% }%>
+        </div>
+    </div>
+
+</div>
+<%- include inc/footer.html %>

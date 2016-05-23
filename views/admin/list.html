@@ -1,0 +1,90 @@
+<%- include inc/header.html %>
+<div class="content">
+    <%- include inc/breadLine.html %>
+    <div class="ui attached segment" style="padding:30px;">
+            <div class="row">
+                <div class="column">
+                    <div class="ui raised segment">
+                        <a class="ui blue ribbon label">Javascript分类列表</a><strong>管理JS代码</strong> 
+                        <br><br>
+                        <div class="ui buttom attached segment">
+                            <div class="ui blue labels" id="jsCateList"></div>
+                        </div>
+                        <br>
+                        <div class="ui buttons">
+                            <a class="ui  button" href="/admin/jsCate">添加分类</a>
+                            <div class="or"></div>
+                            <a class="ui blue  button" href="/admin/jsCodes">查看所有代码列表</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="column">
+                    <div class="ui raised segment">
+                        <a class="ui teal ribbon label">前端框架分类列表</a><strong>管理框架代码</strong> 
+                        <br><br>
+                        <div class="ui buttom attached segment">
+                            <div class="ui teal labels" id="frameworkCateList"></div>
+                        </div>
+                        <br>
+                        <div class="ui buttons">
+                            <a class="ui button" href="/admin/frameworkCate">添加分类</a>
+                            <div class="or"></div>
+                            <a class="ui teal button" href="/admin/frameworks">查看所有前端框架列表</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="column">
+                     <div class="ui raised segment">
+                        <a class="ui violet ribbon label">文章资源分类列表</a><strong>管理文章</strong> 
+                        <br><br>
+                        <div class="ui buttom attached segment">
+                            <div class="ui violet labels" id="articleCateList"></div>
+                        </div>
+                        <br>
+                        <div class="ui buttons">
+                            <a class="ui button" href="/admin/articleCate">添加分类</a>
+                            <div class="or"></div>
+                            <a class="ui violet button" href="/admin/articles">查看所有文章资源列表</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+</div>
+
+<%- include inc/footer.html %>
+<script type="text/javascript">
+    $(function(){
+        $.get('/admin/queryCate',function(result){
+            if(result.status){
+                result.docs.forEach(function(doc){
+                    $('#jsCateList').append('<div class="ui label">添加 ID：'+doc.cateid+'<a class="detail" href="/admin/jscodes/cate/'+doc.cateid+'">'+doc.name+' <i class="icon close"></i></a></div>');
+                });
+            }
+        },'json');
+
+        $.get('/admin/queryFrameworkCate',function(result){
+            if(result.status){
+                result.docs.forEach(function(doc){
+                    $('#frameworkCateList').append('<div class="ui label">添加 ID：'+doc.cateid+'<a class="detail" href="/admin/frameworks/cate/'+doc.cateid+'">'+doc.name+'<i class="icon close"></i></a></div>');
+                });
+            }
+        },'json');
+
+        $.get('/admin/queryArticleCate',function(result){
+            if(result.status){
+                result.docs.forEach(function(doc){
+                    $('#articleCateList').append('<div class="ui label">添加 ID：'+doc.cateid+'<a class="detail" href="/admin/articles/cate/'+doc.cateid+'">'+doc.name+'<i class="icon close"></i></a></div>');
+                });
+            }
+        },'json');
+    });
+</script>

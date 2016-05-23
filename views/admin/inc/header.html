@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/static/css/semantic.css" charset="utf-8">
+    <link rel="stylesheet" href="/views/admin/public/css/custom.css" charset="utf-8">
+    <link href="/views/admin/public/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="/views/admin/public/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="/views/admin/public/css/stylesheet.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/semantic.min.js"></script>
+    <script type="text/javascript" src="/views/admin/public/js/toast.js"></script>
+    <script type='text/javascript' src='/views/admin/public/js/actions.js'></script>
+</head>
+<body style="font-family: '微软雅黑';">
+<!-- 头部 -->
+<div class="header">
+    <a class="logo" href="index.html">
+        <img src="/views/admin/public/img/logo.png" alt="" />
+    </a>
+    <a class="fr link" href="/admin/logout">退出</a>
+</div>
+
+
+<!-- 左侧菜单 -->
+<div class="middle">
+    <div class="menu">
+        <div class="breadLine">
+            <div class="breadcrumb"><a href="/" target="_blank">访问官网首页</a></div>
+        </div>
+        <ul class="navigation">
+            <li class="<% if(crumbs[0].selected==1){ %>active<%}%>">
+                <a href="/admin/list"  class="href_btn">
+                    <span class="isw isw-grid"></span>
+                    <span class="text">仪表盘</span>
+                </a>
+            </li>
+            <li class="openable <% if(crumbs[0].selected==2){ %>active<%}%>">
+                <a href="javascript:;" >
+                    <span class="isw isw-list"></span>
+                    <span class="text">管理JS代码</span>
+                </a>
+                <ul>
+                    <li class="<% if(crumbs.length>1 && crumbs[1].selected==1){ %>active<%}%>">
+                        <a href="/admin/jsCate">
+                            <span class="icon icon-th-large"></span>
+                            <span class="text">添加js分类</span>
+                        </a>
+                    </li>
+                    <li class="<% if(crumbs.length>1 && crumbs[1].selected==2){ %>active<%}%>">
+                        <a href="/admin/addCode">
+                            <span class="icon icon-th-large"></span>
+                            <span class="text">添加代码</span>
+                        </a>
+                    </li>
+                    <li class="<% if(crumbs.length>1 && crumbs[1].selected==3){ %>active<%}%>">
+                        <a href="/admin/jsCodes">
+                            <span class="icon icon-th-large"></span>
+                            <span class="text">查看所有JS代码列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="openable <% if(crumbs[0].selected==3){ %>active<%}%>">
+                <a href="javascript:;">
+                    <span class="isw isw-list"></span>
+                    <span class="text">管理框架文章</span>
+                </a>
+                <ul>
+                    <li class="<% if(crumbs.length>1 && crumbs[1].selected==1){ %>active<%}%>">
+                        <a href="/admin/frameworkCate">
+                            <span class="icon icon-th-large"></span>
+                            <span class="text">添加框架文章分类</span>
+                        </a>
+                    </li>
+                    <li class="<% if(crumbs.length>1 && crumbs[1].selected==2){ %>active<%}%>">
+                        <a href="/admin/addFramework">
+                            <span class="icon icon-th-large"></span>
+                            <span class="text">添加框架文章</span>
+                        </a>
+                    </li>
+                    <li class="<% if(crumbs.length>1 && crumbs[1].selected==3){ %>active<%}%>">
+                        <a href="/admin/frameworks">
+                            <span class="icon icon-th-large"></span>
+                            <span class="text">查看所有框架文章列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="openable <% if(crumbs[0].selected==4){ %>active<%}%>">
+                <a href="javascript:;">
+                    <span class="isw isw-list"></span>
+                    <span class="text">管理文章</span>
+                </a>
+                <ul>
+                    <li class="<% if(crumbs.length>1 && crumbs[1].selected==1){ %>active<%}%>">
+                        <a href="/admin/articleCate">
+                            <span class="icon icon-th-large"></span>
+                            <span class="text">添加文章分类</span>
+                        </a>
+                    </li>
+                    <li class="<% if(crumbs.length>1 && crumbs[1].selected==2){ %>active<%}%>">
+                        <a href="/admin/addArticle">
+                            <span class="icon icon-th-large"></span>
+                            <span class="text">添加文章</span>
+                        </a>
+                    </li>
+                    <li class="<% if(crumbs.length>1 && crumbs[1].selected==3){ %>active<%}%>">
+                        <a href="/admin/articles">
+                            <span class="icon icon-th-large"></span>
+                            <span class="text">查看所有文章列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="/admin/showRegister">
+                    <span class="isw isw-text_document"></span>
+                    <span class="text">添加后台用户</span>
+                </a>
+            </li>
+        </ul>
+        <div class="dr"><span></span></div>
+    </div>
+
+

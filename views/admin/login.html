@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/static/css/semantic.css" charset="utf-8">
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/semantic.min.js"></script>
+</head>
+<body>
+<style type="text/css">
+    body {
+        background-color: #f2f2f2;
+    }
+    body > .grid {
+        height: 100%;
+    }
+    .image {
+        margin-top: -100px;
+    }
+    .column {
+        max-width: 450px;
+    }
+</style>
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <h2 class="ui teal image header">
+            <!-- <img src="assets/images/logo.png" class="image">-->
+            <div class="content">
+                登录后台管理系统
+            </div>
+        </h2>
+        <form class="ui large form">
+            <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="username" id="userName" placeholder="用户名">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" id="password" placeholder="密码">
+                    </div>
+                </div>
+                <div class="ui fluid large teal submit button" id="submit">登录</div>
+            </div>
+        </form>
+        <div class="ui error message" style="display: none;"></div>
+    </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+    /*$(function(){
+        var username = "haisong";
+        document.cookie= "name="+username;
+        console.log(document.cookie);
+    });*/
+    $('#submit').click(function(e){
+        e.preventDefault();
+        var username = $('#userName').val();
+        var password = $('#password').val();
+
+        $.post('/admin/doLogin',{
+            username:username,
+            password:password
+        },function(result){
+            if(result.status){
+                $('.error').addClass('success').remove('error').html(result.message).show();
+                setTimeout(function(){
+                    location.href='/admin/index';
+                },3000);
+            }else{
+                $('.error').html(result.message).show();
+            }
+        },'json');
+
+        return false;
+    });
+
+</script>

@@ -1,0 +1,123 @@
+<%- include inc/header.html %>
+<div class="ui tall stacked segment segment_style">
+    <h3><i class="warning circle icon"></i>本站声明</h3>
+    <p>
+        1、本站遵循行业规范，任何转载的稿件都会明确标注作者和来源；
+        <br>
+        2、本站的原创文章，请转载时务必注明文章作者和来源，不尊重原创的行为我们将 追究责任；
+        <br>
+        3、作者投稿可能会经我们编辑修改或补充。
+    </p>
+</div>
+
+<div class="home_wrap">
+    <div class="ui segments" style="background: #fff; border-radius:0;">
+        <div class="ui segment home_segment" style="border-bottom:1px solid rgba(34, 36, 38, 0.15);">
+            <div class="ui left">
+                <h2 class="ui  header"><i class="file code outline icon"></i>代码集合</h2>
+            </div>
+            <div class="ui right ">
+                <a href="/jsCodes/index/1" target="_blank" class="ui inverted black button"><i class="icon list"></i>更多</a>
+            </div>
+        </div>
+        <style>
+
+        </style>
+        <div class="ui column stackable">
+            <div class="ui special cards six grid"  style="padding:0.75em;margin: 0;">
+                <% if(jsList.length>0){
+                jsList.forEach(function(one){ %>
+               
+
+                <div class="card column">
+                    <div class="blurring dimmable image">
+                        <div class="ui dimmer">
+                            <div class="content">
+                                <div class="center">
+                                    <a href="/jsCodes/cate/<%= one.cateid %>/detail/<%= one._id %>" class="ui inverted button" target="_blank">查&nbsp;看</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style=" height:220px; background: url(<%= one.imgpath? one.imgpath : '/static/images/default.jpg' %>) no-repeat center center; background-size:cover;"></div>
+                        <div class="ui top right attached label"><%= jsCates[one.cateid-1]['name'] %> </div>
+                    </div>
+                    <div class="content">
+                        <a class="header" href="/jsCodes/cate/<%= one.cateid %>/detail/<%= one._id %>" target="_blank"><%= one.title %></a>
+                        <div class="meta">
+                            <span class="date">创建时间: <%= moment(one.date).format('YYYY-MM-DD HH:mm:ss') %></span>
+                        </div>
+                        <div class="meta">
+                            分类: <%= jsCates[one.cateid-1]['name'] %>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i class="unhide icon"></i>
+                            查看次数 2
+                        </a>
+                    </div>
+                </div>
+                <% })}else{ %>
+                <div class="ui huge warning message" style="padding: 20px;margin: 0;">目前还没有“代码分类”的内容！</div>
+                <% }%>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="ui segments" style="background: #fff; border-radius:0;">
+        <div class="ui segment home_segment" style="border-bottom:1px solid rgba(34, 36, 38, 0.15);">
+            <div class="ui left">
+                <h2 class="ui  header"><i class="file text outline icon"></i>WEB前端开发框架</h2>
+            </div>
+            <div class="ui right ">
+                <a href="/frameworks/index/1" target="_blank" class="ui inverted black button"><i class="icon list"></i>更多</a>
+            </div>
+        </div>
+
+        <div class="ui two column stackable grid" style="margin: 0;padding: 20px;">
+            <% if(frameworks.length>0){ %>
+            <div class="three column row">
+                <% frameworks.forEach(function(framework){ %>
+                <div class="column hover_col" onclick="window.open('/frameworks/cate/<%= framework.cateid %>/detail/<%= framework._id %>')">
+                    <div class="ui segment">
+                        <span class="header"><%= framework.title %></span>
+                        <div class="description">发布时间 <%= moment(framework.date).format('YYYY-MM-DD HH:mm:ss') %></div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+            <% }else{ %>
+            <div class="ui huge warning message" style="width:100%; ">目前还没有“WEB前端开发框架”的内容！</div>
+            <% } %>
+        </div>
+    </div>
+    <br>
+    <div class="ui segments" style="background: #fff; border-radius:0;">
+        <div class="ui segment home_segment" style="border-bottom:1px solid rgba(34, 36, 38, 0.15);">
+            <div class="ui left">
+                <h2 class="ui  header"><i class="file text outline icon"></i>全栈试开发社区</h2>
+            </div>
+            <div class="ui right ">
+                <a class="ui inverted black button" target="_blank" href="/articles/index/1"><i class="icon list"></i>更多</a>
+            </div>
+        </div>
+        <div class="ui two column stackable grid" style="margin: 0;padding: 20px;">
+            <% if(articles.length>0){ %>
+            <div class="three column row">
+                <% articles.forEach(function(article){ %>
+                <div class="column hover_col" onclick="window.open('/articles/cate/<%= article.cateid %>/detail/<%= article._id %>')">
+                    <div class="ui segment">
+                        <span class="header"><%= article.title %></span>
+                        <div class="description">发布时间 <%= moment(article.date).format('YYYY-MM-DD HH:mm:ss') %></div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+            <% }else{ %>
+            <div class="ui huge warning message" style="width:100%; ">目前还没有“全栈试开发社区”的内容！</div>
+            <% } %>
+        </div>
+    </div>
+</div>
+<%- include inc/footer.html %>

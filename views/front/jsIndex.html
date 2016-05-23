@@ -1,0 +1,67 @@
+<%- include inc/header.html %>
+<div class="breadcrumb_wrap">
+    <div class="ui large breadcrumb">
+        <a class="section" href="/">首页</a>
+        <i class="right chevron icon divider"></i>
+        <div class="section">代码分类</div>
+        <i class="right chevron icon divider"></i>
+        <div class="active section">全部</div>
+    </div>
+</div>
+<div class="">
+    <div class="ui raised very padded column stackable" style=" margin: 0; padding:1.5rem;">
+        <% if(jsCodes.length>0){ %>
+        <div class="ui  cards six grid"  id="con_wrap">
+            <% jsCodes.forEach(function(one){ %>
+            <div class="card column">
+                <div class="blurring dimmable image">
+                    <div class="ui dimmer">
+                        <div class="content">
+                            <div class="center">
+                                <a href="/jsCodes/cate/<%= one.cateid %>/detail/<%= one._id %>" class="ui inverted button" target="_blank">查&nbsp;看</a>
+                            </div>
+                        </div>
+                    </div>
+                   <img onclick="window.open('/jsCodes/cate/<%= one.cateid %>/detail/<%= one._id %>')"  src="<%= one.imgpath? one.imgpath : '/static/images/default.jpg' %>">
+                    <!--<div style="width:292px; height:165px; background: url(<%= one.imgpath? one.imgpath : '/static/images/default.jpg' %>) no-repeat center center; background-size:cover;"></div>-->
+                </div>
+                <div class="content">
+                    <a class="header" href="/jsCodes/cate/<%= one.cateid %>/detail/<%= one._id %>" target="_blank"><%= one.title %></a>
+                    <div class="meta">
+                        <span class="date">创建时间: <%= moment(one.date).format('YYYY-MM-DD HH:mm:ss') %></span>
+                    </div>
+                    <div class="meta">
+                        分类: <%= jsCates[one.cateid-1]['name'] %>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a>
+                        <i class="unhide icon"></i>
+                        查看次数 2
+                    </a>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+        <div style="text-align: center ; padding-top: 40px;">
+            <div class="ui">共有<strong><%= pageInfo.counts %></strong>篇文章</div>
+            <br>
+            <div class="ui buttons">
+                <% pageInfo.pageList.forEach(function(page){ %>
+                <a href="/jsCodes/index/<%= page %>" class="ui button <% if(page==pageInfo.active){ %> teal <%}else{ %><% }%>"><%= page %>  </a>
+                <% }) %>
+            </div>
+        </div>
+        <% }else{ %>
+        <div class="ui huge warning message" style="width:100%; margin-top: 50px;">目前还没有关于“<%= cateName %>”的内容！ </div>
+        <% } %>
+    </div>
+
+</div>
+<%- include inc/footer.html %>
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+<%- include inc/header.html %>
+<link rel="stylesheet" type="text/css" href="/views/admin/public/wangEditor/highlightJS/highlightJS/styles/sublime.css">
+<script type="text/javascript" src="/views/admin/public/wangEditor/highlightJS/highlightJS/highlight.pack.js"></script>
+<div class="breadcrumb_wrap">
+    <div class="ui large breadcrumb">
+        <a class="section" href="/">首页</a>
+        <i class="right chevron icon divider"></i>
+        <div class="section">全栈试开发社区</div>
+        <i class="right chevron icon divider"></i>
+        <a class="section" href="/articles/cate/<%= article.cateid %>/1"><%= cateName %></a>
+        <i class="right chevron icon divider"></i>
+        <div class="active section"><%= article.title %></div>
+    </div>
+</div>
+
+<div class="wrap">
+    <div class="ui raised very padded text container segment" id="detail">
+        <h2 class="ui header"><%= article.title %></h2>
+        <p>
+            <span class="date">作者: <%= article.author %></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="date">创建时间: <%= moment(article.date).format('YYYY-MM-DD HH:mm:ss') %></span>
+        </p>
+        <div class="ui divider"></div>
+        <div style="word-break: break-all">
+            <div class="ui segment">
+                <p><strong>描述内容：</strong>
+                    <% if(article.des){ %>
+                    <%- article.des %>
+                    <% }else{ %>
+                        没有描述内容
+                    <% } %>
+                </p>
+            </div>
+            <%- article.content %>
+            <div class="ui divider"></div>
+            <div class="ui large  bottom attached buttons">
+                <% if(prev){ %>
+                <a class="ui left labeled icon button" href="/articles/cate/<%= prev.cateid %>/detail/<%= prev._id %>"><i class="left arrow icon"></i>上一篇</a>
+                <% }else{%>
+                <a class="ui left labeled icon button " href="javascript:;"><i class="left arrow icon"></i>已经是第一篇</a>
+                <%  }%>
+                <div class="or"></div>
+                <% if(next){ %>
+                <a class="ui right labeled icon button black" href="/articles/cate/<%= next.cateid %>/detail/<%= next._id %>"><i class="right arrow icon"></i>下一篇</a>
+                <% }else{%>
+                <a class="ui right labeled icon button black" href="javascript:;"><i class="right arrow icon"></i>已经是最后一篇</a>
+                <% }%>
+            </div>
+        </div>
+        <div class="right ui rail" style="margin-left: 0; padding-left: 0;">
+            <div class="ui sticky" >
+                <div class="ui vertical buttons">
+                    <a href="javascript:;" class="ui icon black button i_popup" data-content="喜欢"><i class="heart icon"></i></a>
+                    <% if(prev){ %>
+                    <a href="/articles/cate/<%= prev.cateid %>/detail/<%= prev._id %>" class="ui icon button i_popup"  data-content="上一篇"><i class="chevron left icon"></i></a>
+                    <% }else{%>
+                    <a href="javascript:;" class="ui icon button i_popup"  data-content="已经是第一篇"><i class="chevron left icon"></i></a>
+                    <%  }%>
+                    <% if(next){ %>
+                    <a href="/articles/cate/<%= next.cateid %>/detail/<%= next._id %>" class="ui icon button i_popup" data-content="下一篇"><i class="chevron right icon"></i></a>
+                    <% }else{%>
+                    <a href="javascript:;" class="ui icon button i_popup" data-content="已经是最后一篇"><i class="chevron right icon"></i></a>
+                    <% }%>
+                    <a href="javascript:;" class="ui icon blue button i_popup" style="display: none;" data-content="返回顶部" id="back-to-top"><i class="arrow up icon"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include inc/footer.html %>

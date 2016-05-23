@@ -1,0 +1,40 @@
+<%- include inc/header.html %>
+<div class="content">
+    <%- include inc/breadLine.html %>
+    <div class="ui bottom attached segment height_box">
+        <form class="ui form segment">
+            <div class="field clear_float">
+                <label>用户名</label>
+                <input type="text" name="username" id="userName" placeholder="用户名">
+            </div>
+          <div class="field clear_float">
+            <label>密码</label>
+            <input type="password" name="password" id="password" placeholder="密码">
+          </div>
+          
+          <div class="ui teal submit button"  id="submit">录入</div>
+        </form>
+    </div>
+</div>
+<%- include inc/footer.html %>
+
+<script>
+        $('#submit').click(function(e){
+        e.preventDefault();
+        var username = $('#userName').val();
+        var password = $('#password').val();
+
+        $.post('/admin/doRegister',{
+            username:username,
+            password:password
+        },function(result){
+            if(result.status){
+                location.href = '/admin/login';
+            }else{
+                console.log(result.message);
+            }
+        },'json');
+
+        return false;
+    });
+</script>

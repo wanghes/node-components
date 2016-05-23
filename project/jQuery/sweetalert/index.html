@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>弹出层插件SweetAlert</title>
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="sweetalert.css">
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="form-horizontal">
+            <div class="col-sm-12">
+                <div class="jumbotron text-center">
+                    <h1>SweetAlert 弹出层插件</h1>
+                </div>
+                <div class="text-center">
+                    <div class="demo_1">
+                        <h3>基本示例</h3>
+                        <button class="btn btn-primary">点击这里</button>
+                    </div>
+                    <hr>
+                    <div class="demo_2">
+                        <h3>提示成功</h3>
+                        <button class="btn btn-primary">点击这里</button>
+                    </div>
+                    <hr>
+                    <div class="demo_3">
+                        <h3>提示失败</h3>
+                        <button class="btn btn-primary">点击这里</button>
+                    </div>
+                    <hr>
+                    <div class="demo_4">
+                        <h3>提示确认</h3>
+                       <button class="btn btn-primary">点击这里</button>
+                    </div>
+                    <hr>
+                    <div class="demo_5">
+                        <h3>定义内容</h3>
+                        <button class="btn btn-primary">点击这里</button>
+                    </div>
+                    <hr>
+                    <div class="demo_6">
+                        <h3>确认输入</h3>
+                        <button class="btn btn-primary">点击这里</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function(){
+        $(".demo_1 button").click(function(){
+            swal("这是一个信息提示框!");
+        });
+        $(".demo_2 button").click(function(){
+            swal("Good!", "弹出了一个操作成功的提示框", "success");
+        });
+        $(".demo_3 button").click(function(){
+            swal("OMG!", "弹出了一个错误提示框", "error");
+        });
+        $(".demo_4 button").click(function(){
+            swal({
+                title: "您确定要删除吗？",
+                text: "您确定要删除这条数据？",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "是的，我要删除",
+                confirmButtonColor: "#ec6c62"
+            }, function() {
+                $.ajax({
+                    url: "do.php",
+                    type: "DELETE"
+                }).done(function(data) {
+                    swal("操作成功!", "已成功删除数据！", "success");
+                }).error(function(data) {
+                    swal("OMG", "删除操作失败了!", "error");
+                });
+            });
+        });
+
+        $(".demo_5 button").click(function(){
+            swal({
+                title: "Good!",
+                text: '自定义<span style="color:red">图片</span>、<a href="#">HTML内容</a>。<br/>5秒后自动关闭。',
+                imageUrl: "images/thumbs-up.jpg",
+                html: true,
+                timer: 5000,
+                showConfirmButton: false
+            });
+        });
+
+        $(".demo_6 button").click(function(){
+            swal({
+                title: "输入框来了",
+                text: "这里可以输入并确认:",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "填点东西到这里面吧"
+            }, function(inputValue){
+                if (inputValue === false) return false;
+                if (inputValue === "") {
+                    swal.showInputError("请输入!");
+                    return false
+                }
+                swal("棒极了!", "您填写的是: " + inputValue, "success");
+            });
+        });
+    });
+</script>
+
+
+</body>
+</html>

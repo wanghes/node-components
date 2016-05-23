@@ -1,0 +1,52 @@
+<%- include inc/header.html %>
+<div class="content">
+    <%- include inc/breadLine.html %>
+    <div class="ui attached segment height_box">
+        <div class="com_list ui segment">
+            <% if(articles.length>0){
+            articles.forEach(function(article){ %>
+            <div class="list_one">
+                <div class="fl operate_btn">
+                    <div class=" mini ui buttons">
+                        <div class="ui  button mini deleteNode"  data-href="/admin/deleteArticle/<%= article._id %>">删除</div>
+                        <div class="or"></div>
+                        <a class="ui instagram button mini" href="/admin/editArticle/<%= article._id %>" target="_blank">修改</a>
+                    </div>
+                </div>
+                <div class="fl">
+                    <a href="/admin/articles/<%= article._id %>" target="_blank"><%= article.title %></a>
+                </div>
+            </div>
+            <% })}else{ %>
+            <div class="ui error message">
+                <i class="close icon"></i>
+                <h2> 目前还没有文章列表 </h2>
+                <ul class="list">
+                    <li>请点击添加文章按钮&nbsp;&nbsp;<a href="/admin/addArticle">添加地址</a></li>
+                </ul>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include inc/footer.html %>
+<script type="text/javascript">
+$(function(){
+    $('.deleteNode').click(function(e){
+        e.preventDefault();
+        var href = $(this).data('href');
+        $.get(href,{},function(result){
+            if(result.status){
+                warn(result.message,'','','100px');
+                setTimeout(function(){
+                    location.reload();
+                },2000)
+            }else{
+                warn(result.message,'','','100px');
+            }
+
+        });
+    });
+});
+</script>

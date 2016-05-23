@@ -1,0 +1,30 @@
+<%- include inc/header.html %>
+<div class="content">
+    <%- include inc/breadLine.html %>
+    <div class="ui attached segment height_box">
+        <div class="ui segment">
+            <div class="admin_content">
+                <h3 class="center"><%= article.title %>&nbsp;&nbsp;</h3>
+                <p class="author_info">作者：<%= article.author %></p>
+                <div class="ui buttons mini" style="padding-bottom: 15px;">
+                    <a href="/admin/editArticle/<%= article._id %>" class="mini black ui button" target="_blank">修改代码</a>
+                </div>
+                <div id="chuchu" class="description">
+                    <%- article.content %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include inc/footer.html %>
+<link rel="stylesheet" type="text/css" href="/views/admin/public/wangEditor/highlightJS/highlightJS/styles/darkula.css">
+<script type="text/javascript" src="/views/admin/public/wangEditor/highlightJS/highlightJS/highlight.pack.js"></script>
+<script>
+    $(function(){
+        //执行代码高亮方法
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+    })
+</script>
